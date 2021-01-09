@@ -83,7 +83,7 @@ const MovieDetails = props => {
           </h1>
           <div className="row">
             <div className="col-sm-10 offset-sm-1">
-              <div className="row">
+              <div className="row px-3">
                 <div className="col-md-4">
                   <h6>{movie.runtime}</h6>
                   <h6>{movie.release_date}</h6>
@@ -101,7 +101,7 @@ const MovieDetails = props => {
               </div>
             </div>
 
-            <div className="row">
+            <div className="row mt-5">
               <div className="row my-5">
                 <h3 className="mb-3 text-center">Recommendations</h3>
                 {recommendations
@@ -122,11 +122,18 @@ const MovieDetails = props => {
             <div className="row">
               <h3 className="mb-3 text-center">Review</h3>
               {reviews &&
-                reviews.map(item => (
-                  <div className="d-flex align-items-start">
+                reviews.map((item, index) => (
+                  <div key={index} className="d-flex align-items-start">
                     <img
                       className="img-fluid me-5"
-                      src={item.author_details.avatar_path}
+                      src={
+                        item.author_details.avatar_path
+                          ? item.author_details.avatar_path.slice(
+                              1,
+                              item.author_details.avatar_path.length
+                            )
+                          : "https://secure.gravatar.com/avatar/0cb956fc1daf59cfd92f71c55432b20e.jpg"
+                      }
                       alt=""
                     />
                     <div>

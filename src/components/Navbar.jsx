@@ -7,7 +7,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <nav
-      className={`navbar navbar-expand-sm navbar-${theme} bg-${theme} py-3 d-flex `}
+      className={`shadow-sm navbar navbar-expand-sm navbar-${theme} bg-${theme} py-3 d-flex `}
     >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
