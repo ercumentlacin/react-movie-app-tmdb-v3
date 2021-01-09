@@ -3,7 +3,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import ThemeContext from "../../context/ThemeContext";
 
 import Card from "./Card";
-import './m-movie-detail.css'
+import "./m-movie-detail.css";
 
 const MovieDetails = props => {
   const { movies } = props;
@@ -39,57 +39,80 @@ const MovieDetails = props => {
     window.scrollTo(0, 0);
   }, [movieID]);
   return (
- 
-      <div className="col-sm-8 offset-sm-2">
-        <nav aria-label="breadcrumb" className="my-3 d-flex justify-content-center breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link className={`text-${constrat}`} to="/">Home</Link>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
+    <>
+      <nav
+        aria-label="breadcrumb"
+        className="my-3 d-flex justify-content-center breadcrumb"
+      >
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link className={`text-${constrat}`} to="/">
+              Home
+            </Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {movie.title}
+          </li>
+        </ol>
+      </nav>
+      {/* nav */}
+      <img
+        src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${
+          movie.backdrop_path
+        }`}
+        className="img-fluid "
+        alt={movie.title + " poster"}
+      />
+      <div
+        className={`shadow-sm p-3 text-${constrat} d-flex flex-wrap justify-content-center`}
+      >
+        <div className="ms-md-5">
+          <h1 className="text-center">
+            <Link className={`title text-${constrat}`} to="#">
               {movie.title}
-            </li>
-          </ol>
-        </nav>
-        {/* nav */}
-        <img
-            src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movie.backdrop_path}`}
-            className="img-fluid "
-            alt={movie.title + " poster"}
-          />
-        <div
-          className={`shadow-sm p-3 text-${constrat} d-flex flex-wrap justify-content-center`}
-        >
-          
-          <div className="ms-md-5">
-            <h1><Link className={`title text-${constrat}`} to="#">{movie.title}</Link></h1>
-            <p>
-              <strong>Release Data:</strong> {" " + movie.release_date}
-            </p>
-            <hr />
-            <h2>Overview</h2>
-            <p>{movie.overview}</p>
-            <p>
-              <strong>Users Vote:</strong>
-              <span className="ms-2 rounded-circle border border-danger p-2">
-                {"   " + movie.vote_average}
-              </span>
-            </p>
+            </Link>
+          </h1>
+          <div className="row">
+            <div className="col-sm-10 offset-sm-1">
+              <div className="row">
+                <div className="col-md-4">
+                  <h6>{movie.runtime}</h6>
+                  <h6>{movie.release_date}</h6>
+                  {movie.genres &&
+                    movie.genres.map((item, index) => (
+                      <h6 className="d-inline" key={index}>
+                        {item.name}
+                        <span className={`spans`}>, </span>
+                      </h6>
+                    ))}
+                </div>
+                <div className="col-md-8">
+                  <p className="text-left">{movie.overview}</p>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="row my-5">
+                <h3 className="mb-3 text-center">Recommendations</h3>
+                {recommendations
+                  ? recommendations.map(item => {
+                      return (
+                        <Card
+                          sm={12}
+                          md={6}
+                          lg={4}
+                          key={item.id}
+                          movies={item}
+                        />
+                      );
+                    })
+                  : null}
+              </div>
+            </div>
           </div>
         </div>
-        <hr />
-        <h2 className="mb-3">Recommendations</h2>
-        <div className="row">
-          {recommendations
-            ? recommendations.map(item => {
-                return (
-                  <Card sm={12} md={6} lg={4} key={item.id} movies={item} />
-                );
-              })
-            : null}
-        </div>
       </div>
-
+    </>
   );
 };
 export default MovieDetails;
