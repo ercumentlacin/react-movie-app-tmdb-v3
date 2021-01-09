@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@600;700&display=swap");
+
+.breadcrumb {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.breadcrumb a:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scaleY(1.5);
+  font-size: 2rem;
+}
+
+.title {
+  font-family: "Catamaran", sans-serif;
+  font-weight: 600;
+  position: relative;
+}
+
+.title:after {
+  content: "";
+  width: 98%;
+  height: 4px;
+  background-color: #f48480;
+  transform-origin: center;
+  transform: scaleX(0);
+  position: absolute;
+  bottom: 0;
+  left: 1%;
+  transition: transform 0.3s ease-in-out;
+}
+.title:hover::after {
+  transform: scaleX(1);
+}

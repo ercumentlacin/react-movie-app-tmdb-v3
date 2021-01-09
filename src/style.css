@@ -1,0 +1,40 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.btn-light:focus,
+.btn-light:active,
+.btn-dark:focus,
+.btn-dark:active,
+.btn-dark:active:focus,
+.btn-light:active:focus {
+  box-shadow: 0 !important;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  left: calc(100% - 42px);
+  z-index: 1030;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card-text {
+  min-height: 9rem;
+}
+
+.bg-dark,
+.text-dark,
+.text-light,
+.bg-light {
+  transition: all 0.3s ease-in-out;
+}
