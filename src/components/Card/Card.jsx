@@ -16,7 +16,7 @@ const Card = props => {
   const { theme } = useContext(ThemeContext);
   const constrat = theme === "light" ? "dark" : "light";
   return (
-    <div className={`col-sm-${props.sm} col-md-${props.md} col-lg-${props.lg}`}>
+    <div className={`col-sm-${props.sm} col-md-${props.md} col-lg-${props.lg} `}>
       <div
         className={`rounded-0 border-0 bg-transparent text-${constrat} card mx-auto mb-3`}
         style={{ maxWidth: 18 + "rem" }}
