@@ -8,15 +8,15 @@ import "./m-movie-detail.css";
 const MovieDetails = props => {
   const { movies } = props;
   const [movie, setMovie] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const { movieID } = useParams();
   const { theme } = useContext(ThemeContext);
   const constrat = theme === "light" ? "dark" : "light";
 
+  const REACT_API_KEY = `a31f5c65ca60ed6c9818a95ef8987081`;
+  const axios = require("axios").default;
   useEffect(() => {
-    const REACT_API_KEY = `a31f5c65ca60ed6c9818a95ef8987081`;
-    const axios = require("axios").default;
-
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${movieID}?api_key=${REACT_API_KEY}`
@@ -36,6 +36,15 @@ const MovieDetails = props => {
       .catch(error => console.log(error));
   }, [movie]);
   useEffect(() => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieID}/reviews?api_key=${REACT_API_KEY}&language=en-US&page=1`
+      )
+      .then(response => {
+        setReviews(response.data.results);
+      })
+      .catch(error => console.log(error));
+
     window.scrollTo(0, 0);
   }, [movieID]);
   return (
@@ -91,6 +100,7 @@ const MovieDetails = props => {
                 </div>
               </div>
             </div>
+
             <div className="row">
               <div className="row my-5">
                 <h3 className="mb-3 text-center">Recommendations</h3>
@@ -108,6 +118,23 @@ const MovieDetails = props => {
                     })
                   : null}
               </div>
+            </div>
+            <div className="row">
+              <h3 className="mb-3 text-center">Review</h3>
+              {reviews &&
+                reviews.map(item => (
+                  <div className="d-flex align-items-start">
+                    <img
+                      className="img-fluid me-5"
+                      src={item.author_details.avatar_path}
+                      alt=""
+                    />
+                    <div>
+                      <h6>{item.author}</h6>
+                      <p>{item.content}</p>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
